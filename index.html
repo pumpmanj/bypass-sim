@@ -12,20 +12,20 @@
   --bg:#e9eef1; --panel:#ffffff; --panel2:#f4f7f9; --ink:#14232b; --muted:#56656d; --line:#cdd6db;
   --mon:#0f2630; --monink:#d8e6ec; --monmuted:#86a0ab;
   --art:#e5484d; --ven:#4c9be8; --sat:#e8c547; --temp:#3fc1a5; --flow:#d9d9d9; --alp:#f08c4a;
-  --ok:#2f9e6b; --warn:#c98a10; --bad:#c9333a; --btn:#1d3a47; --btnink:#fff; --accent:#1f6f8b;
+  --ok:#2f9e6b; --warn:#c98a10; --warnc:#b06a00; --bad:#c9333a; --btn:#1d3a47; --btnink:#fff; --accent:#1f6f8b;
   box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
   font-family:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:var(--ink);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#0c1a20; --panel:#132730; --panel2:#18303a; --ink:#e3edf1; --muted:#9db1b9; --line:#29444f;
-    --mon:#081419; --monink:#e3eef2; --monmuted:#7f9aa5; --btn:#2b5566; --accent:#5fb3cf;
+    --mon:#081419; --monink:#e3eef2; --monmuted:#7f9aa5; --btn:#2b5566; --accent:#5fb3cf; --warnc:#f0b429;
   }
 }
 :root[data-theme="dark"]{
   --bg:#0c1a20; --panel:#132730; --panel2:#18303a; --ink:#e3edf1; --muted:#9db1b9; --line:#29444f;
   --mon:#081419; --monink:#e3eef2; --monmuted:#7f9aa5; --btn:#2b5566; --accent:#5fb3cf;
-}
+ --warnc:#f0b429;}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);line-height:1.45}
@@ -144,6 +144,11 @@ dialog p{color:var(--muted);margin:.3rem 0}
 .ba .row4 .c b{font-size:1.45rem}
 .ba .row4 .c small{font-size:.8rem}
 .ba .out b{color:var(--bad)}
+.ba .warn b{color:var(--warnc)}
+.ba .a.warn b,.ba .vn.warn b{color:#9a5a00}
+.gm b.warn,.rkr.warn,td.warn{color:var(--warnc);font-weight:700}
+.v.warn{border-color:#f0b429;background:rgba(240,180,41,.13)}
+.si.warn{background:rgba(240,180,41,.38)}
 .ba .a.out b,.ba .vn.out b{color:#b0101a}
 .ba-foot{font-size:.85rem;color:var(--muted);margin-top:6px}
 .tog{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 10px;font-weight:600}
@@ -162,6 +167,83 @@ dialog p{color:var(--muted);margin:.3rem 0}
 .rk .btns button{flex:1;min-width:0;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:7px 0;font-weight:600;font-size:.85rem}
 .tscale td,.tscale th{white-space:normal}
 .due{font-size:.85rem;color:var(--muted);margin-top:6px}
+.console-panel .waves canvas{height:280px}
+@media (max-width:520px){.console-panel .waves canvas{height:200px}.console-panel{padding:8px}}
+.console{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:8px}
+.cbox{background:var(--panel2);border-radius:10px;padding:8px;min-width:0;text-align:center}
+.cbox>small{display:block;color:var(--muted);font-size:.78rem;text-align:left}
+.gauge{width:100%;max-width:150px;display:block;margin:2px auto 0}
+.cnum{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font-size:1.7rem;line-height:1}
+.csub{font-size:.75rem;color:var(--muted)}
+.resv{display:flex;align-items:center;justify-content:center;gap:4px}
+.resv svg{height:150px;width:auto;flex:none}
+.resnum{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
+.resnum b{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:1.6rem;line-height:1;color:var(--ven)}
+.resnum span{font-size:.72rem;color:var(--muted)}
+.gm{display:grid;grid-template-columns:auto auto;gap:2px 8px;text-align:left;margin:4px 0;font-size:.85rem;align-items:baseline}
+.gm span{color:var(--muted);font-size:.78rem}
+.gm b{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:1.2rem;text-align:right}
+.gm b.out{color:var(--bad)}
+.gmbtn{display:flex;gap:4px}
+.gmbtn button{flex:1;min-width:0;background:var(--btn);color:var(--btnink);border:0;border-radius:6px;padding:7px 2px;font-weight:600;font-size:.8rem}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:2px 0 4px;-webkit-overflow-scrolling:touch}
+.chip{flex:none;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:9px 14px;font-weight:600;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--ok);color:#fff;border-color:var(--ok)}
+.easynote{margin:.4rem 0 0;font-size:.85rem}
+.msg .x{float:right;background:none;border:0;color:var(--muted);font-size:1.1rem;line-height:1;padding:0 4px;margin-left:6px}
+.toast .tx{position:absolute;top:4px;right:6px;background:none;border:0;color:var(--muted);font-size:1.4rem;line-height:1;padding:4px 8px}
+@media (max-width:420px){.console{gap:4px}.cbox{padding:6px 4px}.gm{gap:0 4px;font-size:.78rem}.gm b{font-size:1.05rem}.resv svg{height:118px}.cnum{font-size:1.4rem}.gauge{max-width:112px}.csub{font-size:.68rem}}
+.phone.tab-pump .strip .si{display:none}
+.phone.tab-pump.scrolled .strip .si{display:block}
+.phone.tab-pump .top{display:none}
+.sctl #sTime{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.sctl button{flex:none}
+.sctl .fails{white-space:nowrap}
+@media (min-width:861px){.chips{flex-wrap:wrap;overflow:visible}}
+#sCoach[aria-pressed="true"]{background:var(--ok)}
+.phone.tab-pump .strip .sctl{margin-top:0}
+.chk{list-style:none;padding:0;margin:6px 0 0}
+.chk li{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:6px 0;border-bottom:1px solid var(--line)}
+.chk li span{flex:1 1 180px}
+.chk li.no span{color:var(--bad)}
+.chk button{background:var(--ok);color:#fff;border:0;border-radius:8px;padding:8px 12px;font-weight:600}
+.chk button:disabled{opacity:.6}
+.verdict{margin:8px 0 0;font-weight:600}.verdict.bad{color:var(--bad)}
+.sq .sqg{margin-top:8px}
+.sq small{display:block;color:var(--muted);font-weight:600;margin-bottom:2px}
+.sq button{display:block;width:100%;text-align:left;margin:4px 0;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 10px;font-weight:600}
+.sq button:disabled{opacity:.5}
+.cdbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:45;width:min(460px,calc(100% - 20px));background:var(--bad);color:#fff;border-radius:12px;padding:8px 12px;box-shadow:0 8px 24px rgba(0,0,0,.3);pointer-events:none}
+.phone .cdbar{bottom:calc(env(safe-area-inset-bottom,0px) + 62px)}
+.phone.cdon .toast.show{bottom:calc(env(safe-area-inset-bottom,0px) + 128px)}
+.cdrow{display:flex;align-items:center;gap:10px;justify-content:space-between;font-weight:600}
+.cdrow{font-size:.95rem}
+.cdrow b{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:1.7rem;line-height:1}
+.cdtrack{height:6px;background:rgba(255,255,255,.3);border-radius:3px;margin-top:6px;overflow:hidden}
+.cdtrack i{display:block;height:100%;width:100%;background:#fff;transition:width .1s linear}
+.mlist{display:grid;gap:8px;margin-top:10px}
+.mlist button{width:100%}
+.tsout{margin-top:8px;padding:10px;border-radius:8px;background:var(--panel2);font-size:.9rem}
+.tsout .find{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:8px;flex-wrap:wrap}
+.tsout .find span{flex:1 1 180px}
+.tsout .find button{background:var(--ok);color:#fff;border:0;border-radius:8px;padding:9px 12px;font-weight:600}
+.tsout .find button:disabled{opacity:.6}
+.tsout .conv{margin-top:8px;border-top:1px solid var(--line);padding-top:8px}
+.trow{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.trow button{background:var(--btn);color:var(--btnink);border:0;border-radius:8px;padding:11px 6px;font-weight:600}
+.tcap{font-size:.8rem;margin:.35rem 0 0}
+.restr{font-size:.8rem;font-weight:700;margin-top:2px;white-space:nowrap}
+.restr.down{color:var(--bad)}.restr.up{color:var(--ok)}
+.si.puls small{color:#ff8a8a;font-weight:700}
+.tubes{display:grid;gap:6px;margin:2px 0 10px;padding:8px 10px;background:var(--panel2);border-radius:10px}
+.tube{display:grid;grid-template-columns:86px 1fr;align-items:center;gap:8px}
+.tube span{font-size:.8rem;color:var(--muted);font-weight:600}
+.tube svg{width:100%;height:18px;display:block;border-radius:9px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+.fd{stroke:rgba(255,255,255,.13);stroke-width:12;stroke-dasharray:8 22;animation:fdA 1s linear infinite}
+.fdv{animation-name:fdV}
+@keyframes fdA{to{stroke-dashoffset:-30}}
+@keyframes fdV{to{stroke-dashoffset:30}}
+@media (prefers-reduced-motion:reduce){.fd{animation:none}}
 .strip,.tabbar,.toast{display:none}
 .phone .strip{display:grid;position:sticky;top:env(safe-area-inset-top,0px);z-index:20;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px;background:var(--mon);color:var(--monink);border-radius:0 0 12px 12px;padding:6px 6px 6px;margin:-16px -16px 10px}
 .si{text-align:center;border-radius:6px;padding:2px 0;min-width:0}
@@ -180,9 +262,9 @@ dialog p{color:var(--muted);margin:.3rem 0}
 .phone #sGame [data-tab].tabon{display:block}
 .phone #sGame .monitor[data-tab].tabon{display:grid}
 .phone #sGame .panel[data-tab].tabon:first-child{margin-top:0}
-.phone .wrap{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+.phone .wrap{padding-bottom:calc(170px + env(safe-area-inset-bottom,0px))}
 .phone #speed button[data-s]{display:none}
-.phone .toast.show{display:block;position:fixed;left:10px;right:10px;top:calc(env(safe-area-inset-top,0px) + 96px);z-index:40;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-left:5px solid var(--warn);border-radius:10px;padding:10px 12px;box-shadow:0 6px 20px rgba(0,0,0,.25);font-size:.92rem;cursor:pointer}
+.phone .toast.show{display:block;touch-action:pan-y;padding-right:34px!important;position:fixed;left:10px;right:10px;bottom:calc(env(safe-area-inset-bottom,0px) + 62px);z-index:40;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-left:5px solid var(--warn);border-radius:10px;padding:10px 12px;box-shadow:0 6px 20px rgba(0,0,0,.25);font-size:.92rem;cursor:pointer}
 .phone .toast.show.fail{border-left-color:var(--bad)}
 .toast .more{display:block;color:var(--accent);font-size:.8rem;margin-top:4px;font-weight:600}
 .phone .rkh{flex-direction:column;align-items:flex-start;min-height:46px}
@@ -244,6 +326,7 @@ dialog p{color:var(--muted);margin:.3rem 0}
     <div class="row">
       <button class="go" id="btnCheck">Check my answers</button>
       <button class="go" id="btnToCase" hidden>Go on bypass</button>
+      <button class="ghost" id="calcBack">Main menu</button>
     </div>
   </div>
 </section>
@@ -257,14 +340,14 @@ dialog p{color:var(--muted);margin:.3rem 0}
     <div class="si" id="sFLOW"><small>Flow</small><b>–</b></div>
     <div class="si" id="sRES"><small>Res mL</small><b>–</b></div>
     <div class="si" id="sSVO2"><small>SvO2</small><b>–</b></div>
-    <div class="sctl"><span id="sTime">0:00</span><span class="fails" id="sFails">0 fails</span><button id="sPlay">Pause</button><button id="sSpeed">5×</button></div>
+    <div class="sctl"><span id="sTime">0:00</span><span class="fails" id="sFails">0 fails</span><button id="sMenu">Menu</button><button id="sPlay">Pause</button><button id="sSpeed">5×</button></div>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <nav class="tabbar" id="tabbar" aria-label="Case sections">
-    <button data-t="mon" aria-selected="true">Monitor</button>
-    <button data-t="pump" aria-selected="false">Pump</button>
+    <button data-t="pump" aria-selected="true">Pump</button>
     <button data-t="labs" aria-selected="false">Labs</button>
     <button data-t="feed" aria-selected="false">Feed<span class="badge" id="badge" hidden>0</span></button>
+    <button data-t="more" aria-selected="false">Details</button>
   </nav>
   <div class="top">
     <div>
@@ -277,53 +360,67 @@ dialog p{color:var(--muted);margin:.3rem 0}
       <button data-s="10" aria-pressed="true">10×</button>
       <button data-s="20" aria-pressed="false">20×</button>
       <button class="tog" id="coachTog" aria-pressed="true">Coach: on</button>
+      <button class="tog" id="endTop">End case</button>
+      <button class="tog" id="menuTop">Main menu</button>
       <span class="fails" id="failCount" title="Fails">0 fails</span>
     </div>
   </div>
 
   <div class="grid">
     <div>
-      <div data-tab="mon" class="waves" aria-label="Patient monitor: ECG, arterial, PA, CVP, pulse oximetry and end-tidal CO2">
-        <canvas id="cv"></canvas>
+      <div data-tab="pump" class="panel console-panel">
+        <div class="waves" aria-label="Patient monitor: ECG, arterial, PA, CVP, pulse oximetry and end-tidal CO2"><canvas id="cv"></canvas></div>
+        <div class="console">
+          <div class="cbox"><small>ALP</small>
+            <svg viewBox="0 0 120 112" id="alpGauge" class="gauge" role="img" aria-label="Arterial line pressure gauge"></svg>
+            <div class="cnum c-alp" id="alpNum">–</div><div class="csub">mmHg</div></div>
+          <div class="cbox"><small>Reservoir</small>
+            <div class="resv"><svg viewBox="0 0 64 150" id="resSvg" role="img" aria-label="Venous reservoir level"></svg><div class="resnum"><b id="resNum">–</b><span id="resUnit">mL</span><span class="restr" id="resTr">→ steady</span></div></div>
+            <div class="csub" id="resSub">Low level 200</div></div>
+          <div class="cbox"><small id="gmWhen">Blood gas</small><div class="gm" id="gm"></div>
+            <div class="gmbtn"><button id="aABG2">Draw gas</button><button id="aACT2">ACT</button></div></div>
+        </div>
+        <div class="tubes" aria-label="Circuit tubing colors">
+          <div class="tube"><span>Venous line</span><svg viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="1" width="300" height="16" rx="8" id="tubeV" fill="#6e1222"/><line x1="0" y1="9" x2="300" y2="9" class="fd fdv" id="fdV"/><rect x="4" y="3.5" width="292" height="3" rx="1.5" fill="rgba(255,255,255,.28)"/></svg></div>
+          <div class="tube"><span>Arterial line</span><svg viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="1" width="300" height="16" rx="8" id="tubeA" fill="#e0262f"/><line x1="0" y1="9" x2="300" y2="9" class="fd" id="fdA"/><rect x="4" y="3.5" width="292" height="3" rx="1.5" fill="rgba(255,255,255,.35)"/></svg></div>
+        </div>
+        <div class="rks" id="rks"></div>
+        <div class="chips" aria-label="Drugs and fluids">
+          <button id="aNeo" class="chip">Neo</button>
+          <button id="aHep" class="chip">Heparin</button>
+          <button id="aCa" class="chip">CaCl</button>
+          <button id="aBicarb" class="chip">Bicarb</button>
+          <button id="aFluid" class="chip">+250 mL crystalloid</button>
+          <button id="aBlood" class="chip">+1 unit PRBC</button>
+          <button id="aHemo" class="chip" aria-pressed="false">Hemoconc: off</button>
+        </div>
       </div>
-      <div data-tab="mon" class="monitor" id="mon">
+
+      <div data-tab="pump" class="panel">
+        <h3>More controls</h3>
+        <div class="knobs" id="knobs"></div>
+        <h3 style="margin-top:12px">Troubleshoot</h3>
+        <p class="k easynote" id="easyNote" hidden>Easy has no circuit problems, but practice the habit: check our side first, then ask the surgeon.</p>
+        <div class="trow"><button id="tOur">Check our side</button><button id="tSurg">Ask surgeon</button></div>
+        <div class="tsout" id="tsOut" hidden></div>
+        <h3 style="margin-top:12px">Finish</h3>
+        <div class="acts">
+          <button id="aWean">Ready to wean</button>
+          <button id="aEnd" class="alt">End case</button>
+          <button id="aMenu" class="alt">Main menu</button>
+        </div>
+      </div>
+
+      <div data-tab="more" class="monitor" id="mon">
         <div class="v" id="vMAP"><small>MAP</small><span class="num c-art" id="mMAP">–</span> <span class="unit">mmHg</span><div class="sub">Target 55–80</div></div>
         <div class="v" id="vCVP"><small>CVP</small><span class="num c-ven" id="mCVP">–</span> <span class="unit">mmHg</span><div class="sub">Target 0–3</div></div>
-        <div class="v" id="vALP"><small>Arterial line</small><span class="num c-alp" id="mALP">–</span> <span class="unit">mmHg</span><div class="sub">About 123–250</div></div>
+        <div class="v" id="vALP"><small>Arterial line</small><span class="num c-alp" id="mALP">–</span> <span class="unit">mmHg</span><div class="sub">About 123–250, max 300</div></div>
         <div class="v" id="vFLOW"><small>Pump flow</small><span class="num c-flow" id="mFLOW">–</span> <span class="unit">L/min</span><div class="sub" id="mCI">CI –</div></div>
         <div class="v" id="vSVO2"><small>SvO2</small><span class="num c-sat" id="mSVO2">–</span> <span class="unit">%</span><div class="sub">Target 65–85</div></div>
         <div class="v" id="vNIRS"><small>Cerebral NIRS</small><span class="num c-sat" id="mNIRS">–</span> <span class="unit">%</span><div class="sub">Target 50–80</div></div>
         <div class="v" id="vTEMP"><small>Core / arterial out</small><span class="num c-temp" id="mTEMP">–</span> <span class="unit">°C</span><div class="sub" id="mTEMPs">–</div></div>
         <div class="v" id="vDO2"><small>DO2i</small><span class="num c-flow" id="mDO2">–</span><div class="sub">Keep ≥ 270</div></div>
-        <div class="v res" id="vRES"><small>Reservoir</small><span class="num c-ven" id="mRES">–</span> <span class="unit">mL</span><div class="bar"><i id="resBar"></i><em id="resMin"></em></div><div class="sub">Low-level alarm at 200 mL</div></div>
         <div class="v res"><small>Oxygenator outlet</small><div id="mCOLOR" style="font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:600">–</div><div class="sub">Dark arterial blood = gas supply or oxygenator problem</div></div>
-      </div>
-
-      <div data-tab="pump" class="panel">
-        <h3>Heart-lung machine</h3>
-        <div class="rks" id="rks"></div>
-        <div class="knobs" id="knobs"></div>
-      </div>
-
-      <div data-tab="pump" class="panel">
-        <h3>Drugs, fluids and labs</h3>
-        <div class="acts">
-          <button id="aNeo" class="alt">Neo-Synephrine</button>
-          <button id="aHep" class="alt">Heparin</button>
-          <button id="aCa" class="alt">Calcium chloride</button>
-          <button id="aBicarb" class="alt">Sodium bicarb</button>
-          <button id="aFluid" class="alt">Add 250 mL crystalloid</button>
-          <button id="aBlood" class="alt">Add 1 unit PRBC</button>
-          <button id="aHemo" class="alt" aria-pressed="false">Hemoconcentrator: off</button>
-        </div>
-        <h3 style="margin-top:12px">Troubleshoot</h3>
-        <div class="acts">
-          <button id="tVen" class="alt">Check venous line</button>
-          <button id="tArt" class="alt">Check arterial line</button>
-          <button id="tGas" class="alt">Check gas supply</button>
-          <button id="tCan" class="alt">Ask surgeon to check venous cannula</button>
-          <button id="aWean">Ready to wean</button>
-        </div>
       </div>
     </div>
 
@@ -361,6 +458,30 @@ dialog p{color:var(--muted);margin:.3rem 0}
 </section>
 </div>
 
+<div class="cdbar" id="cdbar" hidden role="alert"><div class="cdrow"><span>Something changed. Find it and respond.</span><b id="cdNum">10</b></div><div class="cdtrack"><i id="cdFill"></i></div></div>
+<dialog id="askDlg">
+  <h3 id="askMsg">Are you sure?</h3>
+  <div class="mlist">
+    <button class="go" id="askOk">OK</button>
+    <button class="ghost" id="askNo">Cancel</button>
+  </div>
+</dialog>
+<dialog id="menuDlg">
+  <h3>Case menu</h3>
+  <p class="k">The case is paused.</p>
+  <div class="mlist">
+    <button class="go" id="mResume">Resume</button>
+    <button class="ghost" id="mCoach">Coach: on</button>
+    <button class="ghost" id="mEnd">End case and see debrief</button>
+    <button class="ghost" id="mMain">Main menu</button>
+  </div>
+</dialog>
+<dialog id="miss">
+  <h3 id="missTitle">Missed</h3>
+  <p id="missText" style="color:var(--ink)"></p>
+  <p class="k">The problem is still happening. Continue and practice the fix.</p>
+  <button class="go" id="missGo">Continue the case</button>
+</dialog>
 <dialog id="dose">
   <h3 id="dTitle">Dose</h3>
   <p id="dInfo"></p>
@@ -444,15 +565,15 @@ const D=()=>cfg.diff;
 function startCase(){
   failsN=0;
   const vtot=P.ebv+P.prime;
-  S={t:0,Q:P.top,sweep:Math.round(P.top*10)/10,fio2:60,forane:1.0,water:37,
-     Tcore:36.8,Tart:36.8,SVRb:rnd(1100,1250),svr:0,neo:0,depth:1,vaso:1,
+  S={t:0,Q:P.top,sweep:Math.round(P.top/2*10)/10,fio2:80,forane:1.0,water:37,
+     Tcore:36.8,Tart:36.8,SVRb:rnd(1180,1320),svr:0,neo:0,depth:1,vaso:1,
      PaCO2:40,PaO2:320,HCO3b:rnd(21.5,23.5),lact:1.1,
      Vtot:vtot,RCV:P.resHct/100*vtot,res:ri(650,800),
-     ACT:ri(520,580),actRate:(D()==="easy"?0.75:1.2),K:rnd(3.9,4.4),iCa:rnd(0.92,1.0),
-     drain:1,dAir:1,dPos:1,kink:1,gas:true,rhythm:'sinus',hr:78,hemo:false,bleed:0,
+     ACT:ri(520,580),actRate:(D()==="easy"?0.25:1.2),K:rnd(3.9,4.4),iCa:rnd(0.92,1.0),
+     drain:1,dAir:1,dPos:1,dKink:1,Vex:0,capBoost:1,tableUp:false,vavd:false,vkSide:'pump',kink:1,gas:true,rhythm:'sinus',hr:78,hemo:false,bleed:0,
      lastGas:-1,lastACT:-1,lastACTval:null,pending:[],gasLog:[],
      phase:"cool",rewarmCalled:false,weanAsked:false,ended:false,
-     inRange:{},tot:0,ftimers:{},fired:{},failList:[],events:[],coachCD:{},streak:{},recur:{},actions:[],
+     inRange:{},tot:0,ftimers:{},fired:{},failList:[],events:[],coachCD:{},streak:{},recur:{},wins:[],winLog:[],cnt:{our:0,surg:0,neo:0,vol:0},eps:[],troubleLog:[],resHist:[],kinkSide:'pump',actions:[],
      maxRewarm:0,prevCore:36.8,PaCO2bump:0,metab:1};
   S.svr=S.SVRb;
   if(D()!=="easy" && Math.random()<0.5) S.forane=0;
@@ -468,7 +589,7 @@ function startCase(){
   feed("surg",`Surgeon: "Bypass looks good. Cool the patient to 32–34."`);
   if(cfg.coach==="on") feed("coach","Coach: set the heater water temperature lower to start cooling (try 28 °C). Draw a blood gas early, then every 30 minutes or less. Check ACT every 30 minutes.");
   show("#sGame");
-  unread=0;updBadge();setTab("mon");
+  unread=0;updBadge();setTab("pump");$("#cdbar").hidden=true;$("#tsOut").hidden=true;$("#tsOut").innerHTML="";$("#easyNote").hidden=D()!=="easy";buildConsole();
   setSpeed(isPhone()?5:10);
 }
 function scheduleEvents(){
@@ -477,7 +598,7 @@ function scheduleEvents(){
   E.push({t:ri(4,9)*m,id:"vaso"});
   E.push({t:ri(22,32)*m,id:"crystal"});
   E.push({t:ri(35,50)*m,id:"light"});
-  E.push({t:ri(14,24)*m,id:"malpos"});
+  E.push({t:ri(14,24)*m,id:Math.random()<0.5?"malpos":"venkink"});
   if(D()==="hard"){
     E.push({t:ri(12,20)*m,id:"kink"});
     E.push({t:ri(38,55)*m,id:"airlock"});
@@ -487,16 +608,84 @@ function scheduleEvents(){
 }
 function fireEvent(id){
   if(speed>5) setSpeed(5);
+  startWin(id);
   switch(id){
     case "vaso": S.vaso=0.58; S.vasoUntil=S.t+ri(18,26)*60; feed("anes",`Anesthesia: "Heads up, this patient was on an ACE inhibitor before surgery."`); break;
     case "crystal": S.Vtot+=500; S.res+=500; feed("anes",`Anesthesia: "I just gave 500 mL of lactated Ringer's through the line."`); break;
     case "light": S.lightEvent=true; feed("anes",`Anesthesia: "BIS is creeping up. Patient may be getting light."`); break;
-    case "kink": S.kink=6; break;
-    case "airlock": S.dAir=0.9; break;
-    case "malpos": S.dPos=0.96; break;
-    case "gasfail": S.gas=false; break;
+    case "kink": S.kink=6; S.kinkSide=Math.random()<0.5?"pump":"field"; startEp("kink"); break;
+    case "airlock": S.dAir=0.75; startEp("airlock"); break;
+    case "malpos": S.dPos=0.8; startEp("malpos"); break;
+    case "venkink": S.dKink=0.78; S.vkSide=Math.random()<0.5?"pump":"field"; startEp("venkink"); break;
+    case "gasfail": S.gas=false; startEp("gasfail"); break;
     case "bleed": S.bleed=150; S.bleedUntil=S.t+ri(6,10)*60; feed("surg",`Surgeon: "There's some bleeding back here, I'm using the cell saver."`); break;
   }
+}
+
+function startEp(id){S.eps.push({id,t0:S.t,Q0:S.Q,flow:null,our:null,surg:null})}
+const EPN={venkink:"Venous line kink",airlock:"Venous line airlock",malpos:"Venous cannula malposition",kink:"Arterial line kink",gasfail:"Gas supply failure"};
+function resolveEp(id){
+  const i=S.eps.findIndex(e=>e.id===id); if(i<0) return; const ep=S.eps.splice(i,1)[0];
+  const needFlow=ep.id!=="gasfail", needSurg=ep.id==="malpos"||(ep.id==="kink"&&S.kinkSide==="field")||(ep.id==="venkink"&&S.vkSide==="field");
+  const items=[];
+  if(needFlow) items.push([ep.flow!==null&&(ep.our===null||ep.flow<=ep.our+30),"Turned pump flow down before troubleshooting"]);
+  items.push([ep.our!==null,"Checked our side"]);
+  if(needSurg) items.push([ep.surg!==null&&ep.our!==null&&ep.our<=ep.surg,"Then asked the surgeon"]);
+  else if(ep.surg!==null&&(ep.our===null||ep.surg<ep.our)) items.push([false,"Checked our side before asking the surgeon"]);
+  const mins=((S.t-ep.t0)/60).toFixed(1), ok=items.every(x=>x[0]);
+  feed(ok?"good":"warn",`<b>${EPN[ep.id]} fixed in ${mins} case min.</b><br>${items.map(x=>(x[0]?"✓ ":"✗ ")+x[1]).join("<br>")}${ok?"":"<br>Order to remember: flow down → check our side → ask the surgeon."}`);
+  S.troubleLog.push({title:EPN[ep.id],mins,items,ok});
+}
+
+const WIN={
+  malpos:{name:"Venous cannula malposition",resp:["flow","our","surg"],how:"The venous cannula slipped, so venous drainage dropped and blood stayed in the patient. The signs: the reservoir started falling, CVP rose, and the arterial line turned pulsatile. The fix: turn flow down until the reservoir stops falling, check our side (it will be clear), then ask the surgeon about venous cannula position. Raising the table or vacuum assist can buy time."},
+  venkink:{name:"Venous line kink",resp:["flow","our","surg"],how:"The venous line kinked, so blood couldn't drain back. The signs: the reservoir started falling, CVP rose, and the arterial line turned pulsatile. The fix: turn flow down until the reservoir stops falling, check our side, and if the kink isn't at the pump, ask the surgeon about kinks or clamps on the venous line."},
+  airlock:{name:"Venous line airlock",resp:["flow","our","surg"],how:"Air entered the venous line and broke the gravity siphon. The signs: the reservoir dropped fast, CVP rose, and the arterial line turned pulsatile. The fix: turn flow down right away (this one drains fast), check our side, and walk the air to the reservoir."},
+  kink:{name:"Arterial line kink",resp:["flow","our","surg"],how:"The arterial line kinked. The signs: ALP climbed toward the 300 limit while MAP stayed about the same, so the resistance is in the line, not the patient. The fix: turn flow down to bring ALP down, check our side for kinks or clamps, then ask the surgeon about the arterial line."},
+  gasfail:{name:"Gas supply failure",resp:["our"],how:"The gas line came off the oxygenator. The signs: the arterial tubing darkened toward venous color, SvO2 fell, and gases showed PaO2 dropping and PaCO2 rising. The fix: check our side and reconnect the gas line."},
+  vaso:{name:"Vasoplegia (low SVR)",resp:["neo"],how:"SVR dropped (vasoplegia, common with preop ACE inhibitors), so MAP fell even though flow stayed at CI 2.4. The fix: confirm flow is at target first, then give Neo (about 100 µg) to tighten the vessels."},
+  light:{name:"Patient getting light",resp:["forane"],how:"Anesthesia lightened, so catecholamines raised SVR and MAP climbed. The fix: deepen anesthesia by turning the Forane up (around 1.5%). Don't cut flow to treat it, because that lowers oxygen delivery."},
+  bleed:{name:"Bleeding to the cell saver",resp:["vol","flow","surg"],how:"Blood was lost to the field and the cell saver, so the reservoir dropped without CVP rising or pulsatility (the patient isn't filling up, blood is leaving). The fix: add volume, turn flow down if the level gets low, and talk to the surgeon."},
+};
+function startWin(id){
+  if(!WIN[id]) return;
+  S.wins.push({id,rem:10,start:10,Q0:S.Q,for0:S.forane,c0:Object.assign({},S.cnt)});
+  if(speed>2) setSpeed(2);
+  renderWin();
+}
+function winMet(w){
+  const r=WIN[w.id].resp,c=S.cnt,c0=w.c0;
+  return r.some(k=>k==="flow"?(S.Q>0&&S.Q<=w.Q0-0.3):k==="forane"?S.forane>=w.for0+0.25:c[k]>c0[k]);
+}
+function tickWins(dt){
+  if(!S.wins.length) return;
+  S.wins.forEach(w=>{
+    if(w.done) return;
+    if(winMet(w)){w.done=true;const t=(w.start-w.rem).toFixed(1);feed("good",`Good catch: you responded to the ${WIN[w.id].name.toLowerCase()} in ${t} s.`);S.winLog.push({id:w.id,ok:true,t});return}
+    w.rem-=dt;
+    if(w.rem<=0){w.done=true;S.winLog.push({id:w.id,ok:false});missWin(w)}
+  });
+  S.wins=S.wins.filter(w=>!w.done);
+  if(!S.wins.length&&speed===2) setSpeed(5);
+  renderWin();
+}
+function renderWin(){
+  const el=$("#cdbar"); if(!el) return;
+  const w=S&&S.wins[0];
+  document.body.classList.toggle("cdon",!!w);
+  if(!w){el.hidden=true;return}
+  el.hidden=false;
+  $("#cdNum").textContent=Math.max(0,Math.ceil(w.rem));
+  $("#cdFill").style.width=Math.max(0,w.rem/w.start*100)+"%";
+}
+function missWin(w){
+  const info=WIN[w.id];
+  feed("coach",`<b>Missed: ${info.name}.</b> ${info.how}`);
+  hideToast(); if(isPhone()){unread=Math.max(0,unread-1);updBadge()}
+  setSpeed(0);
+  $("#missTitle").textContent="Missed: "+info.name;
+  $("#missText").textContent=info.how;
+  $("#miss").showModal();
 }
 
 function step(){ // 1 case-second
@@ -504,7 +693,11 @@ function step(){ // 1 case-second
   // events
   S.events.forEach(e=>{if(!e.done&&S.t>=e.t){e.done=true;fireEvent(e.id)}});
   if(S.vasoUntil&&S.t>S.vasoUntil){S.vaso=1;S.vasoUntil=0}
+  if(S.vasoTreated&&S.vaso<1){S.vaso=Math.min(1,S.vaso+(1-0.58)/180);if(S.vaso>=1){S.vasoUntil=0;S.vasoTreated=false}}
+  if(S.lightEvent&&S.forane>=1.5&&!S.lightFixedAt) S.lightFixedAt=S.t;
+  if(S.lightFixedAt&&S.t-S.lightFixedAt>600){S.lightEvent=false;S.lightFixedAt=0}
   if(S.bleedUntil&&S.t>S.bleedUntil){S.bleed=0;S.bleedUntil=0}
+  S.eps.forEach(ep=>{if(ep.flow===null&&S.Q<=ep.Q0-0.3) ep.flow=S.t});
   // phases
   if(!S.rewarmCalled&&S.t>=(P.caseMin-28)*60){S.rewarmCalled=true;S.phase="rewarm";feed("surg",`Surgeon: "We're finishing up. Start rewarming."`); if(cfg.coach==="on")feed("coach","Coach: raise the heater water temperature gradually. Keep arterial outlet ≤ 37 °C and rewarm no faster than 0.5 °C/min.");}
   if(S.phase==="cool"&&S.Tcore<=34) S.phase="maintain";
@@ -531,27 +724,31 @@ function step(){ // 1 case-second
   // volume
   const hemoRate=S.hemo&&S.res>200?60/60:0; // mL/s
   const third=4/60;
-  S.drain=S.dAir*S.dPos;
-  const venRet=S.Q*1000/60*S.drain;
+  S.drain=S.dAir*S.dPos*S.dKink;
+  const qa=S.Q*1000/60, cap=P.top*1.2*S.drain*S.capBoost*1000/60;
+  const venRet=Math.max(0,Math.min(qa+S.Vex*0.02,cap));
+  S.Vex=Math.max(0,S.Vex+qa-venRet);
   const bleed=S.bleed/60;
-  S.res+= venRet - S.Q*1000/60 - hemoRate - third - bleed;
+  S.res+= venRet - qa - hemoRate - third - bleed;
   S.Vtot-= hemoRate+third+bleed;
   S.RCV-= bleed*(S.RCV/S.Vtot);
   if(S.res<=50&&S.Q>0){S.res=50;S.Q=0;fail("air","You pumped air","The reservoir ran dry while the arterial pump was running, so air went to the patient. This is a catastrophic air embolism. The pump has been stopped. When venous return drops, reduce flow immediately and find the cause. Response time = reservoir volume ÷ (flow ÷ 60).",true);syncKnobs();}
   S.res=clamp(S.res,0,4000);
+  S.resHist.push(S.res); if(S.resHist.length>16) S.resHist.shift();
+  S.resTrend=S.res-S.resHist[0];
   // hct
   S.hct=S.RCV/S.Vtot*100;
   // pressures
-  S.cvp=2+(1-S.drain)*110+ (S.res<0?0:0);
+  S.cvp=2+S.Vex/35;
   S.map=S.Q*S.svr/80+S.cvp;
   const kA=P.small?3:1.8;
   S.alp=S.map+8*S.Q+kA*S.Q*S.Q*S.kink;
   // gases
   const effSweep=S.gas?S.sweep:0.05, effFi=S.gas?S.fio2:21;
-  const co2ss=clamp(40*(S.metab*P.bsa*2.4)/Math.max(effSweep,0.05),15,95);
+  const co2ss=clamp(40*(S.metab*P.bsa*1.2)/Math.max(effSweep,0.05),15,95);
   S.PaCO2+=(co2ss-S.PaCO2)*dt/90;
   if(S.PaCO2bump>0){S.PaCO2bump*=Math.pow(0.5,dt/120)}
-  const o2ss=S.gas?clamp(6*effFi-20,40,600):38;
+  const o2ss=S.gas?clamp(3.2*effFi+15,40,600):38;
   S.PaO2+=(o2ss-S.PaO2)*dt/(S.gas?30:60);
   const sat=S.PaO2>=100?1:Math.pow(S.PaO2,2.7)/(Math.pow(S.PaO2,2.7)+Math.pow(26.8,2.7));
   S.sat=sat;
@@ -573,7 +770,7 @@ function step(){ // 1 case-second
   // labs drift
   const coldSlow=clamp(1-0.08*(37-S.Tcore),0.55,1);
   S.ACT-=S.actRate/60*dt*coldSlow;
-  S.iCa-=0.0025/60*dt;
+  if(D()!=="easy") S.iCa-=0.0025/60*dt;
   S.K+=0.002/60*dt;
   // rhythm
   if(S.rhythm==="sinus"&&S.Tcore<28.5){S.rhythm="vf";feed("warn","EKG: the heart has gone into ventricular fibrillation. Cooling below about 28–29 °C irritates the myocardium. On full bypass the pump supports the patient, but a fibrillating heart that fills can distend. Warm back toward 32–34 °C.");}
@@ -615,7 +812,7 @@ function checkFails(){
   held("tart",S.Tart>37.5,60,"Arterial outlet too hot","Arterial outlet temperature went over 37 °C. Hot blood to the brain risks neurologic injury and can bring gas out of solution as bubbles. Keep the arterial outlet at 31–37 °C.");
   held("grad",Math.abs(S.Tart-S.Tcore)>10.5,180,"Temperature gradient too wide","The gap between arterial outlet and core stayed over 10 °C for 3 minutes. Program limit is a 6–10 °C gradient: change temperatures gradually.");
   held("rate",(S.lastRate||0)>0.5,60,"Rewarming too fast","Core temperature rose more than 0.5 °C per minute. Rapid rewarming can bring gas out of solution and form bubbles. Rewarm gradually.");
-  held("alp",S.alp>300,30,"Arterial line pressure too high","ALP stayed over 300 mmHg. Connections can separate and the line can burst. Reduce flow right away and find the cause: clamp, kink, or cannula position.");
+  held("alp",S.alp>=300,30,"Arterial line pressure at the 300 limit","ALP sat at the 300 mmHg maximum for 30 seconds. At that pressure connections can separate, the line can burst, and the aorta can be injured. Reduce flow right away and find the cause: clamp, kink, or cannula position.");
 }
 
 /* ---------- scoring ---------- */
@@ -650,7 +847,7 @@ function coach(){
     ["hcthi",S.hemo&&S.hct>28.5,`Hct is about ${fmt(S.hct)}. That's above 28; you can stop hemoconcentrating.`],
     ["cold",S.phase==="maintain"&&S.Tcore<31.8,`Core is ${fmt(S.Tcore,1)} °C, below the 32–34 target. Raise the heater water temperature to hold the core where the surgeon asked.`],
     ["res",S.res<350,`Reservoir is ${fmt(S.res)} mL, getting close to the 200 mL alarm. Add volume or reduce flow while you find out why.`],
-    ["puls",S.drain<0.97&&S.rhythm==="sinus",`The arterial line is pulsatile and CVP is up, so the heart is filling. Venous drainage has dropped: check your venous line, then ask about the venous cannula.`],
+    ["puls",S.Vex>80&&S.rhythm==="sinus",`The arterial line is pulsatile and CVP is up, so blood is staying in the patient and the heart is filling. Turn flow down, check our side, then ask the surgeon about kinks, clamps and cannula position.`],
     ["gasdue",S.lastGas<0?S.t>1500:S.t-S.lastGas>1500,"A blood gas is due within 5 minutes (every 30 minutes or less)."],
     ["actdue",S.lastACT<0?S.t>1500:S.t-S.lastACT>1500,"An ACT check is due within 5 minutes (every 30 minutes)."],
   ];
@@ -671,6 +868,7 @@ function feed(kind,html){
   const who={sys:"",surg:"",anes:"",fail:"fail",coach:"coach",good:"good",warn:"warn"}[kind]||"";
   const d=document.createElement("div");d.className="msg "+who;
   d.innerHTML=`<span class="t">${mmss(S?S.t:0)}</span>${html}`;
+  if(kind==="coach"){const x=document.createElement("button");x.className="x";x.setAttribute("aria-label","Dismiss tip");x.textContent="×";x.onclick=()=>d.remove();d.prepend(x)}
   const f=$("#feed");f.prepend(d);
   if(isPhone()&&tab!=="feed"&&["fail","warn","surg","anes","coach","good"].includes(kind)){unread++;updBadge();toast(html,kind)}
 }
@@ -728,22 +926,23 @@ function syncKnobs(){
     const el=$("#rk_"+o.k);el.setAttribute("aria-valuenow",S[o.k]);el.setAttribute("aria-valuetext",fmt(S[o.k],o.d)+" "+o.unit);});
 }
 
-function setV(id,val,alarm){$("#m"+id).textContent=val;const v=$("#v"+id);if(v)v.classList.toggle("alarm",!!alarm)}
+const RNG={map:[55,80,50,90],cvp:[-99,4,-99,8],alp:[-1,250,-1,280],ci:[2.35,99,2.2,99],res:[400,1e9,300,1e9],svo2:[65,85,60,90],nirs:[50,80,45,85],do2:[270,1e9,250,1e9],tart:[-99,37,-99,37.5],sao2:[95,101,90,101],pao2:[150,250,120,300],paco2:[35,45,30,50],ph:[7.35,7.45,7.3,7.5],hct:[24,28,21,32],k:[3.5,5,3,5.5],ca:[0.8,1.0,0.7,1.2],lac:[-1,2,-1,4],act:[480,1e9,400,1e9]};
+function T(k,v){if(v==null||v===""||isNaN(+v))return"";const r=RNG[k];v=+v;if(v>=r[0]&&v<=r[1])return"";if(v>=r[2]&&v<=r[3])return"warn";return"out"}
+function worst(...a){return a.includes("out")?"out":a.includes("warn")?"warn":""}
+function setV(id,val,lv){$("#m"+id).textContent=val;const v=$("#v"+id);if(v){v.classList.toggle("alarm",lv==="out");v.classList.toggle("warn",lv==="warn")}}
 function render(){
   const co2=S.PaCO2+S.PaCO2bump;
-  setV("MAP",fmt(S.map),S.map<50||S.map>90);
-  setV("CVP",fmt(S.cvp),S.cvp>8);
-  setV("ALP",fmt(S.alp),S.alp>260);
-  setV("FLOW",fmt(S.Q,1),S.ci<2.2);
+  setV("MAP",fmt(S.map),T("map",S.map));
+  setV("CVP",fmt(S.cvp),T("cvp",S.cvp));
+  setV("ALP",fmt(S.alp),T("alp",S.alp));
+  setV("FLOW",fmt(S.Q,1),T("ci",S.ci));
   $("#mCI").textContent="CI "+fmt(S.ci,2);
-  setV("SVO2",fmt(S.svo2),S.svo2<60);
-  setV("NIRS",fmt(S.nirs),S.nirs<50);
-  setV("TEMP",fmt(S.Tcore,1)+" / "+fmt(S.Tart,1),S.Tart>37.5);
+  setV("SVO2",fmt(S.svo2),T("svo2",S.svo2));
+  setV("NIRS",fmt(S.nirs),T("nirs",S.nirs));
+  setV("TEMP",fmt(S.Tcore,1)+" / "+fmt(S.Tart,1),T("tart",S.Tart));
   $("#mTEMPs").textContent=S.phase==="cool"?"Cooling to 32–34":S.phase==="rewarm"?"Rewarming: core > 36":"Hold 32–34";
-  setV("DO2",fmt(S.do2i),S.do2i<270);
-  setV("RES",fmt(S.res),S.res<200);
-  $("#resBar").style.width=clamp(S.res/2000*100,0,100)+"%";
-  $("#resMin").style.left=(200/2000*100)+"%";
+  setV("DO2",fmt(S.do2i),T("do2",S.do2i));
+  renderConsole();
   if(S.t%5===0||!S._baInit){S._baInit=true;renderBA()}
   renderKnobReads();
   renderStrip();
@@ -766,8 +965,9 @@ function renderTime(){
 }
 function loop(){
   if(!S||S.ended) return;
-  const n=Math.round(speed/10);
-  for(let i=0;i<n;i++) step();
+  S.acc=(S.acc||0)+speed/10;
+  while(S.acc>=1&&!S.ended){step();S.acc-=1}
+  if(!S.ended) tickWins(0.1);
   render();
 }
 function setSpeed(s){
@@ -799,8 +999,8 @@ function ekgV(p){return 0.15*g(p,.12,.025)-0.15*g(p,.235,.006)+g(p,.25,.008)-0.2
 function artShape(p){let t=p-0.27;if(t<0)t+=1;if(t<0.1)return Math.sin(Math.PI/2*t/0.1);return Math.exp(-(t-0.1)/0.35)-0.12*g(t,.3,.015)+0.08*g(t,.34,.03)}
 function cvpShape(p){return 0.6*g(p,.15,.04)+0.3*g(p,.32,.03)+0.5*g(p,.65,.06)}
 function plethShape(p){let t=p-0.32;if(t<0)t+=1;if(t<0.22)return Math.sin(Math.PI/2*t/0.22);return 0.5+0.5*Math.cos(Math.PI*(t-0.22)/0.78)-0.06*g(t,.42,.03)}
-function pulseAmp(){if(!S||S.rhythm!=="sinus")return 0;let a=3+(1-S.drain)*300;if(S.Q<P.top)a+=(1-S.Q/P.top)*45;return clamp(Math.min(a,S.map*1.3),0,50)}
-function paMean(){let m=7+(1-S.drain)*120+(S.Q<P.top?(1-S.Q/P.top)*10:0);if(S.rhythm==="vf")m+=(1-S.drain)*60;return clamp(m,4,40)}
+function pulseAmp(){if(!S||S.rhythm!=="sinus")return 0;let a=3+S.Vex*0.09;if(S.Q<P.top)a+=(1-S.Q/P.top)*10;return clamp(Math.min(a,S.map*1.3),0,50)}
+function paMean(){let m=7+S.Vex*0.03;if(S.rhythm==="vf")m+=S.Vex*0.04;return clamp(m,4,40)}
 const Y=(r,v)=>r.bot-(clamp(v,r.lo,r.hi)-r.lo)/(r.hi-r.lo)*(r.bot-r.top);
 function drawScales(){ctx.fillStyle=WC.bg;ctx.fillRect(TW-28,0,28,H);ctx.font="10px Barlow, Arial, sans-serif";ctx.fillStyle=WC.lbl;ctx.textAlign="right";
   ROWS.forEach(r=>{if(!r.sc)return;r.sc.forEach((v,i)=>{const y=Y(r,v);ctx.fillRect(TW-5,y,5,1);ctx.textBaseline=i===0?"top":i===r.sc.length-1?"bottom":"middle";ctx.fillText(String(v),TW-7,y)})});ctx.textAlign="left"}
@@ -838,7 +1038,7 @@ function frame(ts){
     const v={ekg:e,
       abp:S.map-A*0.35+A*artShape(beat)+(Math.random()-.5)*0.6,
       pap:pm-Ap*0.35+Ap*artShape((beat+0.97)%1)+(Math.random()-.5)*0.4,
-      cvp:S.cvp+(S.rhythm==="sinus"?(0.8+(1-S.drain)*22)*cvpShape(beat):0)+(Math.random()-.5)*0.3,
+      cvp:S.cvp+(S.rhythm==="sinus"?(0.8+S.Vex*0.05)*cvpShape(beat):0)+(Math.random()-.5)*0.3,
       spo2:0.5+(A>5?(plethShape(beat)-0.5)*Math.min(1,A/25):(Math.random()-.5)*0.02),
       co2:0.3+(Math.random()-.5)*0.4};
     ctx.fillStyle=WC.bg;ctx.fillRect(wx,0,Math.min(14,TW-wx),H);
@@ -859,53 +1059,124 @@ function applyPhone(){document.body.classList.toggle("phone",mqPhone.matches)}
 mqPhone.addEventListener("change",applyPhone); applyPhone();
 let tab="mon", unread=0, toastT=null;
 function setTab(t){
-  tab=t;
+  tab=t;document.body.classList.toggle("tab-pump",t==="pump");
   document.querySelectorAll("#sGame [data-tab]").forEach(el=>el.classList.toggle("tabon",el.dataset.tab===t));
   document.querySelectorAll("#tabbar button").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.t===t)));
   if(t==="feed"){unread=0;updBadge();hideToast()}
   window.scrollTo(0,0);
 }
 document.querySelectorAll("#tabbar button").forEach(b=>b.addEventListener("click",()=>setTab(b.dataset.t)));
+const monEl=document.querySelector(".console-panel .waves");
+new IntersectionObserver(es=>{es.forEach(e=>document.body.classList.toggle("scrolled",e.intersectionRatio<0.35))},{threshold:[0,0.35,0.7,1]}).observe(monEl);
 function updBadge(){const b=$("#badge");b.hidden=!unread;b.textContent=unread>9?"9+":unread}
 function hideToast(){$("#toast").classList.remove("show","fail")}
 function toast(html,kind){
-  const tmp=document.createElement("div");tmp.innerHTML=html;let txt=tmp.textContent.trim();
+  const tmp=document.createElement("div");tmp.innerHTML=html.replace(/<br>/g," • ");let txt=tmp.textContent.trim();
   if(txt.length>130){const cut=txt.slice(0,130);txt=cut.slice(0,Math.max(cut.lastIndexOf(" "),90))+"…"}
   const m=txt.match(/^(FAIL: [^.]*\.|Tip[^:]*:|Coach:|Surgeon:|Anesthesia:)/);
   const safe=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
   const t=$("#toast");t.innerHTML=(m?`<b>${safe(m[1])}</b>${safe(txt.slice(m[1].length))}`:safe(txt))+'<span class="more">Tap to see the full message in the feed</span>';
+  t.insertAdjacentHTML("afterbegin",'<button class="tx" aria-label="Dismiss">×</button>');
+  t.querySelector(".tx").onclick=e=>{e.stopPropagation();hideToast()};
+  t.style.transform="";t.style.opacity="";
   t.classList.add("show");t.classList.toggle("fail",kind==="fail");
   clearTimeout(toastT);toastT=setTimeout(hideToast,kind==="fail"?9000:6000);
 }
-$("#toast").addEventListener("click",()=>setTab("feed"));
+let swX=null,swiped=false;
+const tEl=$("#toast");
+tEl.addEventListener("pointerdown",e=>{swX=e.clientX;swiped=false});
+tEl.addEventListener("pointermove",e=>{if(swX===null)return;const dx=e.clientX-swX;if(Math.abs(dx)>8){swiped=true;tEl.style.transform=`translateX(${dx}px)`;tEl.style.opacity=String(Math.max(0.2,1-Math.abs(dx)/200))}});
+const swEnd=e=>{if(swX===null)return;const dx=(e.clientX||swX)-swX;swX=null;if(Math.abs(dx)>70){hideToast()}tEl.style.transform="";tEl.style.opacity=""};
+tEl.addEventListener("pointerup",swEnd);tEl.addEventListener("pointercancel",swEnd);
+tEl.addEventListener("click",()=>{if(swiped){swiped=false;return}setTab("feed")});
 function renderStrip(){
-  if(!isPhone())return;
-  const put=(id,v,al)=>{const el=$("#"+id);el.querySelector("b").textContent=v;el.classList.toggle("alarm",!!al)};
-  put("sMAP",fmt(S.map),S.map<50||S.map>90);
-  put("sCVP",fmt(S.cvp),S.cvp>8);
-  put("sALP",fmt(S.alp),S.alp>260);
-  put("sFLOW",fmt(S.Q,1),S.ci<2.2);
-  put("sRES",fmt(S.res),S.res<300);
-  put("sSVO2",fmt(S.svo2),S.svo2<60);
-  $("#sTime").textContent="Bypass "+mmss(S.t)+" / ~"+P.caseMin+" min";
+  if(!isPhone()||S==null||S.map==null||isNaN(S.map))return;
+  const put=(id,v,c)=>{const el=$("#"+id);el.querySelector("b").textContent=v;el.classList.toggle("alarm",c==="out");el.classList.toggle("warn",c==="warn")};
+  put("sMAP",fmt(S.map),T("map",S.map));
+  const pu=pulseAmp()>8;$("#sMAP small").textContent=pu?"PULS":"MAP";$("#sMAP").classList.toggle("puls",pu);
+  put("sCVP",fmt(S.cvp),T("cvp",S.cvp));
+  put("sALP",fmt(S.alp),T("alp",S.alp));
+  put("sFLOW",fmt(S.Q,1),T("ci",S.ci));
+  const tr=S.resTrend||0, ar=tr<-15?"↓":tr>15?"↑":"";
+  put("sRES",D()==="hard"?(ar||"→"):fmt(S.res)+ar,worst(T("res",S.res),tr<-15?"warn":""));
+  put("sSVO2",fmt(S.svo2),T("svo2",S.svo2));
+  $("#sTime").textContent=mmss(S.t);
   $("#sFails").textContent=$("#failCount").textContent;
   $("#sPlay").textContent=speed?"Pause":"Play";
+
   $("#sSpeed").textContent=(speed||lastSpeed)+"×";
 }
 $("#sPlay").addEventListener("click",()=>{setSpeed(speed?0:(lastSpeed||5));renderStrip()});
 $("#sSpeed").addEventListener("click",()=>{const order=[5,10,20];const cur=speed||lastSpeed||5;const nx=order[(order.indexOf(cur)+1)%order.length];setSpeed(nx);renderStrip()});
 
+/* ---------- pump console ---------- */
+function polar(a,r){const t=(a-90)*Math.PI/180;return [60+r*Math.cos(t),60+r*Math.sin(t)]}
+const ALPMAX=300, alpAng=v=>-135+270*clamp(v,0,ALPMAX)/ALPMAX;
+function gArc(v0,v1,r,col,w){const [x0,y0]=polar(alpAng(v0),r),[x1,y1]=polar(alpAng(v1),r);const big=alpAng(v1)-alpAng(v0)>180?1:0;return `<path d="M${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 ${big} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}" fill="none" stroke="${col}" stroke-width="${w}"/>`}
+function buildConsole(){
+  let g=`<circle cx="60" cy="60" r="54" fill="var(--mon)"/>`;
+  g+=gArc(123,250,47,"#2f9e6b",5)+gArc(250,280,47,"#c98a10",5)+gArc(280,300,47,"#c9333a",5);
+  for(let v=0;v<=ALPMAX;v+=25){const maj=v%100===0;const [x0,y0]=polar(alpAng(v),maj?38:41),[x1,y1]=polar(alpAng(v),44);g+=`<line x1="${x0.toFixed(1)}" y1="${y0.toFixed(1)}" x2="${x1.toFixed(1)}" y2="${y1.toFixed(1)}" stroke="#d8e6ec" stroke-width="${maj?2:1}"/>`;
+    if(maj){const [tx,ty]=polar(alpAng(v),29);g+=`<text x="${tx.toFixed(1)}" y="${(ty+3).toFixed(1)}" font-size="8.5" fill="#d8e6ec" text-anchor="middle" font-family="Barlow, Arial, sans-serif">${v}</text>`}}
+  g+=`<text x="60" y="84" font-size="7" fill="#86a0ab" text-anchor="middle" font-family="Barlow, Arial, sans-serif">mmHg</text>`;
+  g+=`<line id="alpNeedle" x1="60" y1="60" x2="60" y2="18" stroke="#f08c4a" stroke-width="3" stroke-linecap="round"/><circle cx="60" cy="60" r="5" fill="#f08c4a"/>`;
+  $("#alpGauge").innerHTML=g;
+  // reservoir: 0-2000 mL scale
+  const top=8,bot=142,x0=8,x1=40;
+  let r=`<rect x="${x0}" y="${top}" width="${x1-x0}" height="${bot-top}" rx="5" fill="var(--panel)" stroke="var(--muted)" stroke-width="1.5"/>`;
+  r+=`<clipPath id="resClip"><rect x="${x0+1}" y="${top+1}" width="${x1-x0-2}" height="${bot-top-2}" rx="4"/></clipPath>`;
+  r+=`<g clip-path="url(#resClip)"><rect id="resFill" x="${x0}" y="${bot}" width="${x1-x0}" height="0" fill="#7d1d2b"/><rect id="resTop" x="${x0}" y="${bot}" width="${x1-x0}" height="2" fill="#c0394c"/></g>`;
+  for(let v=0;v<=2000;v+=100){const y=bot-(v/2000)*(bot-top);const maj=v%500===0;r+=`<line x1="${x1-(maj?12:6)}" y1="${y.toFixed(1)}" x2="${x1}" y2="${y.toFixed(1)}" stroke="var(--ink)" stroke-width="${maj?1.3:.7}" opacity=".8"/>`;
+    if(maj&&v>0)r+=`<text x="${x1+3}" y="${(y+3).toFixed(1)}" font-size="8" fill="var(--ink)" font-family="Barlow, Arial, sans-serif">${v}</text>`}
+  const yl=bot-(200/2000)*(bot-top);r+=`<line x1="${x0}" y1="${yl.toFixed(1)}" x2="${x1}" y2="${yl.toFixed(1)}" stroke="#c9333a" stroke-width="1.4" stroke-dasharray="3 2"/>`;
+  $("#resSvg").innerHTML=r;
+  const hard=D()==="hard";
+  $("#resNum").style.display=hard?"none":"";$("#resUnit").style.display=hard?"none":"";
+  $("#resSub").textContent=hard?"Read the scale":"Low level: red dashes";
+}
+function renderConsole(){
+  if(!$("#alpNeedle"))return;
+  $("#alpNeedle").setAttribute("transform",`rotate(${alpAng(S.alp).toFixed(1)} 60 60)`);
+  $("#alpNum").innerHTML=S.alp>=300?'300<span style="font-size:.55em"> MAX</span>':fmt(S.alp);
+  {const c=T("alp",S.alp);$("#alpNum").style.color=c==="out"?"var(--bad)":c==="warn"?"var(--warnc)":"";}
+  const top=8,bot=142,lv=clamp(S.res,0,2000),y=bot-(lv/2000)*(bot-top);
+  $("#resFill").setAttribute("y",y.toFixed(1));$("#resFill").setAttribute("height",(bot-y).toFixed(1));
+  $("#resTop").setAttribute("y",(y-1).toFixed(1));
+  $("#resNum").textContent=fmt(S.res);{const c=T("res",S.res);$("#resNum").style.color=c==="out"?"var(--bad)":c==="warn"?"var(--warnc)":"";}
+  const tr=S.resTrend||0, tEl=$("#resTr");
+  tEl.textContent=tr<-15?"↓ falling":tr>15?"↑ rising":"→ steady";
+  tEl.className="restr"+(tr<-15?" down":tr>15?" up":"");
+  const {live,g}=gasSrc();
+  const row=(l,v,c)=>`<span>${l}</span><b class="${c||""}">${v}</b>`;
+  $("#gm").innerHTML=g?row("pH",fmt(g.pha,2),T("ph",g.pha))+row("PaCO₂",g.paco2,T("paco2",g.paco2))+row("PaO₂",g.pao2,T("pao2",g.pao2))+row("Hct",fmt(g.hct,1),T("hct",g.hct))+row("SvO₂",fmt(S.svo2),T("svo2",S.svo2))+row("ACT",S.lastACTval||"– –",S.lastACTval?T("act",S.lastACTval):"")
+    :row("pH","– –")+row("PaCO₂","– –")+row("PaO₂","– –")+row("Hct","– –")+row("SvO₂",fmt(S.svo2),T("svo2",S.svo2))+row("ACT",S.lastACTval||"– –",S.lastACTval?T("act",S.lastACTval):"");
+  $("#gmWhen").textContent=live?"Gas (live)":g?`Gas, ${Math.floor((S.t-g.t)/60)}m ago`:"Gas: none yet";
+  $("#tubeV").setAttribute("fill",satColor(S.svo2));
+  $("#tubeA").setAttribute("fill",satColor(S.sat*100));
+  const run=speed>0&&S.Q>0.1, dur=run?(2.2/Math.max(S.Q,0.3)).toFixed(2)+"s":"1s";
+  ["#fdV","#fdA"].forEach(id=>{const el=$(id);el.style.animationDuration=dur;el.style.animationPlayState=run?"running":"paused"});
+}
+function satColor(sat){
+  const st=[[25,[38,6,14]],[50,[70,10,22]],[65,[100,16,30]],[75,[122,20,34]],[85,[150,24,38]],[95,[205,30,40]],[100,[226,38,46]]];
+  sat=clamp(sat,25,100);
+  for(let i=1;i<st.length;i++){if(sat<=st[i][0]){const [a,ca]=st[i-1],[b,cb]=st[i],f=(sat-a)/(b-a);return `rgb(${ca.map((c,j)=>Math.round(c+(cb[j]-c)*f)).join(",")})`}}
+  return "rgb(226,38,46)";
+}
+$("#aABG2").addEventListener("click",()=>$("#aABG").click());
+$("#aACT2").addEventListener("click",()=>getACT());
+
 /* ---------- knob readouts ---------- */
 function renderKnobReads(){
-  const live=D()==="easy", g=live?gasNow():(S.lastGasVals||null);
+  const {live,g}=gasSrc();
   const ago=g&&!live?` (${Math.floor((S.t-g.t)/60)}m ago)`:"";
-  const put=(k,html,out,title)=>{const el=$("#rkr_"+k);if(!el)return;el.innerHTML=html;el.classList.toggle("out",!!out);el.title=title||""};
-  put("fio2",g?`PaO₂ ${g.pao2}`:"PaO₂ – –",g&&(g.pao2<150||g.pao2>250),g?(live?"Live inline value":"From your last blood gas"+ago):"Draw a blood gas");
-  put("sweep",g?`PaCO₂ ${g.paco2}`:"PaCO₂ – –",g&&(g.paco2<35||g.paco2>45),g?(live?"Live inline value":"From your last blood gas"+ago):"Draw a blood gas");
-  put("Q",`CI ${fmt(S.ci,2)}<br>MAP ${fmt(S.map)}`,S.ci<2.2||S.map<55||S.map>80,"Live monitor values");
+  const put=(k,html,c,title)=>{const el=$("#rkr_"+k);if(!el)return;el.innerHTML=html;el.classList.toggle("out",c==="out");el.classList.toggle("warn",c==="warn");el.title=title||""};
+  put("fio2",g?`PaO₂ ${g.pao2}`:"PaO₂ – –",g?T("pao2",g.pao2):"",g?(live?"Live inline value":"From your last blood gas"+ago):"Draw a blood gas");
+  put("sweep",g?`PaCO₂ ${g.paco2}`:"PaCO₂ – –",g?T("paco2",g.paco2):"",g?(live?"Live inline value":"From your last blood gas"+ago):"Draw a blood gas");
+  put("Q",`CI ${fmt(S.ci,2)}<br>MAP ${fmt(S.map)}`,worst(T("ci",S.ci),T("map",S.map)),"Live monitor values");
 }
 
 /* ---------- blood analysis ---------- */
+function gasSrc(){const d=D();if(d==="easy"||(d==="medium"&&S.lastGasVals))return{live:true,g:gasNow()};return{live:false,g:S.lastGasVals||null}}
 function gasNow(){
   const co2=S.PaCO2+S.PaCO2bump, sv=S.svo2/100;
   const pvo2=26.8*Math.pow(Math.max(sv,0.05)/Math.max(1-sv,0.02),1/2.7);
@@ -916,22 +1187,22 @@ function gasNow(){
     hco3:S.hco3,be:S.be,hgb:S.hct/3,vo2:95*S.metab*P.bsa,hct:S.hct,k:S.K,ca:S.iCa,lac:S.lact,q:S.Q};
 }
 function renderBA(){
-  const live=D()==="easy", g=live?gasNow():(S.lastGasVals||null);
+  const {live,g}=gasSrc();
   const v=(x,d)=>g?fmt(x,d):"– –";
-  const o=(x,a,b)=>g&&(x<a||x>b)?" out":"";
+  const o=(k,x)=>g?" "+T(k,x):"";
   const cell=(cls,lab,val,unit,out)=>`<div class="c ${cls}${out||""}"><small>${lab}</small><b>${val}</b><i>${unit}</i></div>`;
   const q=`<div class="c w"><small>Q</small><b>${fmt(S.Q,1)}</b><i>L/min</i></div>`;
   $("#ba").innerHTML=
-    cell("a","SaO₂",v(g&&g.sao2,0),"%",g&&o(g.sao2,95,100))+cell("vn","SvO₂",v(g&&g.svo2,0),"%",g&&o(g.svo2,65,85))+
-    cell("a","PaO₂",v(g&&g.pao2,0),"mmHg",g&&o(g.pao2,150,250))+cell("vn","PvO₂",v(g&&g.pvo2,0),"mmHg")+
-    cell("a","PaCO₂",v(g&&g.paco2,0),"mmHg",g&&o(g.paco2,35,45))+cell("vn","PvCO₂",v(g&&g.pvco2,0),"mmHg")+
-    cell("a","pHa",v(g&&g.pha,2),"",g&&o(g.pha,7.35,7.45))+cell("vn","pHv",v(g&&g.phv,2),"")+
+    cell("a","SaO₂",v(g&&g.sao2,0),"%",o("sao2",g&&g.sao2))+cell("vn","SvO₂",v(g&&g.svo2,0),"%",o("svo2",g&&g.svo2))+
+    cell("a","PaO₂",v(g&&g.pao2,0),"mmHg",o("pao2",g&&g.pao2))+cell("vn","PvO₂",v(g&&g.pvo2,0),"mmHg")+
+    cell("a","PaCO₂",v(g&&g.paco2,0),"mmHg",o("paco2",g&&g.paco2))+cell("vn","PvCO₂",v(g&&g.pvco2,0),"mmHg")+
+    cell("a","pHa",v(g&&g.pha,2),"",o("ph",g&&g.pha))+cell("vn","pHv",v(g&&g.phv,2),"")+
     cell("a","aTemp",v(g&&g.atemp,1),"°C")+cell("vn","vTemp",v(g&&g.vtemp,1),"°C")+
     `<div class="row4">${cell("w","HCO₃",v(g&&g.hco3,0),"mEq/L")}${cell("w","BE",v(g&&g.be,0),"mEq/L")}${cell("w","Hgb",v(g&&g.hgb,1),"g/dL")}${cell("w","VO₂",v(g&&g.vo2,0),"mL/min")}</div>`+
-    `<div class="row4">${cell("w","Hct",v(g&&g.hct,1),"%",g&&o(g.hct,24,28))}${cell("w","K⁺",v(g&&g.k,1),"mEq/L",g&&o(g.k,3.5,5))}${cell("w","iCa",v(g&&g.ca,2),"mmol/L",g&&o(g.ca,0.8,1.0))}${cell("w","Lactate",v(g&&g.lac,1),"mmol/L",g&&o(g.lac,0,2))}</div>`+
-    `<div class="row4" style="grid-template-columns:1.2fr 1fr 1fr"><div class="c w${S.lastACTval&&S.lastACTval<480?" out":""}"><small>ACT</small><b>${S.lastACTval||"– –"}</b><i>sec</i></div><div class="c w" style="align-items:center;justify-content:center"><button class="ba-get" id="aACT">Get</button></div>${q}</div>`;
+    `<div class="row4">${cell("w","Hct",v(g&&g.hct,1),"%",o("hct",g&&g.hct))}${cell("w","K⁺",v(g&&g.k,1),"mEq/L",o("k",g&&g.k))}${cell("w","iCa",v(g&&g.ca,2),"mmol/L",o("ca",g&&g.ca))}${cell("w","Lactate",v(g&&g.lac,1),"mmol/L",o("lac",g&&g.lac))}</div>`+
+    `<div class="row4" style="grid-template-columns:1.2fr 1fr 1fr"><div class="c w${S.lastACTval?" "+T("act",S.lastACTval):""}"><small>ACT</small><b>${S.lastACTval||"– –"}</b><i>sec</i></div><div class="c w" style="align-items:center;justify-content:center"><button class="ba-get" id="aACT">Get</button></div>${q}</div>`;
   $("#aACT").onclick=getACT;
-  $("#baWhen").textContent=live?"Live inline monitor (Easy). ACT still has to be drawn with Get.":g?`Sample drawn at ${mmss(g.t)} (${cmin(S.t-g.t)} ago).`:"No sample yet. Draw a blood gas.";
+  $("#baWhen").textContent=live?(D()==="easy"?"Live inline monitor (Easy). ACT still has to be drawn with Get.":"Live after your first gas (Medium), so you see each knob change. ACT still has to be drawn with Get."):g?`Sample drawn at ${mmss(g.t)} (${cmin(S.t-g.t)} ago).`:"No sample yet. Draw a blood gas.";
 }
 
 /* labs */
@@ -942,9 +1213,9 @@ $("#aABG").addEventListener("click",()=>{
   feed("sys","Blood gas drawn. Results in about 1 minute.");
   S.pending.push({due:S.t+60,fn:()=>{
     S.gasLog.unshift(snap); S.lastGasVals=Object.assign({},G,{k:G.k,ca:G.ca}); renderBA();
-    const o=(v,a,b)=>(+v<a||+v>b)?' class="out"':"";
+    const o=(k,v)=>{const c=T(k,v);return c?` class="${c}"`:""};
     const tr=document.createElement("tr");
-    tr.innerHTML=`<td>${mmss(snap.t)}</td><td${o(snap.ph,7.35,7.45)}>${snap.ph}</td><td${o(snap.co2,35,45)}>${snap.co2}</td><td${o(snap.o2,150,250)}>${snap.o2}</td><td>${snap.hco3}</td><td>${snap.be}</td><td${o(snap.hct,24,28)}>${snap.hct}</td><td${o(snap.k,3.5,5)}>${snap.k}</td><td${o(snap.ca,0.8,1.0)}>${snap.ca}</td><td${o(snap.lac,0,2)}>${snap.lac}</td><td${o(snap.sv,65,85)}>${snap.sv}</td>`;
+    tr.innerHTML=`<td>${mmss(snap.t)}</td><td${o("ph",snap.ph)}>${snap.ph}</td><td${o("paco2",snap.co2)}>${snap.co2}</td><td${o("pao2",snap.o2)}>${snap.o2}</td><td>${snap.hco3}</td><td>${snap.be}</td><td${o("hct",snap.hct)}>${snap.hct}</td><td${o("k",snap.k)}>${snap.k}</td><td${o("ca",snap.ca)}>${snap.ca}</td><td${o("lac",snap.lac)}>${snap.lac}</td><td${o("svo2",snap.sv)}>${snap.sv}</td>`;
     $("#gasTbl tbody").prepend(tr);
     feed("sys",`Gas result: pH ${snap.ph}, PaCO2 ${snap.co2}, PaO2 ${snap.o2}, Hct ${snap.hct}, K ${snap.k}, iCa ${snap.ca}, lactate ${snap.lac}.`);
   }});
@@ -965,8 +1236,10 @@ function dose(title,info,options,cb){
   dlg.showModal();
 }
 $("#dCancel").addEventListener("click",()=>$("#dose").close());
+$("#missGo").addEventListener("click",()=>{$("#miss").close();setSpeed(5)});
 $("#aNeo").addEventListener("click",()=>dose("Neo-Synephrine (phenylephrine)","100 µg/mL syringe. Raises SVR (alpha-1). Give only when flow is adequate and SVR is low.",[["50 µg",50],["100 µg",100],["150 µg",150],["200 µg",200],["250 µg",250]],d=>{
-  S.neo+=d*2.2;
+  S.neo+=d*2.2; S.cnt.neo++;
+  if(S.vaso<1&&S.ci>=2.2&&!S.vasoTreated){S.vasoTreated=true;feed("good","Neo given with flow at target: correct treatment for low SVR. The patient's vessel tone will recover over the next few minutes, so MAP should hold.")}
   feed("sys",`Neo ${d} µg given (${fmt(d/100,1)} mL).`);
   if(S.ci<2.2) fail("neoflow","Pressor given with low flow",`You gave Neo while CI was ${fmt(S.ci,2)}. MAP = flow × SVR: when flow is low, fix flow first. Squeezing the vessels on top of low flow starves the tissues. Never give pressors while flow is still low.`,true);
   else if(S.map>70) feed("warn",`Neo given with MAP already ${fmt(S.map)}. Neo is for low MAP with low SVR. Watch for hypertension.`);
@@ -982,29 +1255,118 @@ $("#aBicarb").addEventListener("click",()=>dose("Sodium bicarbonate","8.4% = 1 m
   S.HCO3b+=d/(0.3*P.wt); S.PaCO2bump+=d/10; feed("sys",`Sodium bicarbonate ${d} mEq given (${d} mL).`);
   if(S.lastGasVals&&+S.lastGasVals.be>-2) feed("warn","Your last base excess wasn't low. Bicarb treats metabolic acidosis; giving it without one makes the patient alkalotic.");
 }));
-$("#aFluid").addEventListener("click",()=>{S.Vtot+=250;S.res+=250;feed("sys","250 mL crystalloid added to the reservoir. Hct will fall slightly.")});
-$("#aBlood").addEventListener("click",()=>{S.Vtot+=300;S.RCV+=180;S.res+=300;feed("sys","1 unit PRBC (about 300 mL, Hct about 60%) added to the reservoir.")});
-function setHemoBtn(){$("#aHemo").textContent="Hemoconcentrator: "+(S.hemo?"on":"off");$("#aHemo").setAttribute("aria-pressed",String(S.hemo))}
+$("#aFluid").addEventListener("click",()=>{S.cnt.vol++;S.Vtot+=250;S.res+=250;feed("sys","250 mL crystalloid added to the reservoir. Hct will fall slightly.")});
+$("#aBlood").addEventListener("click",()=>{S.cnt.vol++;S.Vtot+=300;S.RCV+=180;S.res+=300;feed("sys","1 unit PRBC (about 300 mL, Hct about 60%) added to the reservoir.")});
+function setHemoBtn(){$("#aHemo").textContent="Hemoconc: "+(S.hemo?"on":"off");$("#aHemo").setAttribute("aria-pressed",String(S.hemo))}
 $("#aHemo").addEventListener("click",()=>{S.hemo=!S.hemo;setHemoBtn();feed("sys",S.hemo?"Hemoconcentrator on: removing about 60 mL/min of plasma water. Reservoir level drops and Hct rises.":"Hemoconcentrator off.")});
 
 /* troubleshooting */
-$("#tVen").addEventListener("click",()=>{
-  if(S.dAir<1){S.dAir=1;feed("good","Found an airlock in the venous line. You walked the air back to the reservoir and drainage is restored.")}
-  else if(S.dPos<1) feed("sys","Venous line checked: no clamps, kinks or air at your end. But CVP is up and the arterial line is pulsatile, so the heart is filling. Think about the cannula position at the field.");
-  else feed("sys","Venous line checked: no clamps, kinks or air. Drainage is fine.");
+function tsShow(html,append){const o=$("#tsOut");o.hidden=false;if(append)o.insertAdjacentHTML("beforeend",html);else o.innerHTML=html}
+$("#tOur").addEventListener("click",()=>{
+  S.cnt.our++;
+  S.eps.forEach(ep=>{if(ep.our===null)ep.our=S.t});
+  const items=[
+    {ok:!(S.dKink<1&&S.vkSide==="pump"),lab:"Venous line at the pump: kinks, clamps",bad:"kinked near the reservoir, causing poor drainage",fix:"Straighten the venous line",fn:()=>{S.dKink=1},id:"venkink"},
+    {ok:S.dAir>=1,lab:"Venous line: air, airlock",bad:"air trapped in the line is blocking gravity drainage",fix:"Walk the air to the reservoir",fn:()=>{S.dAir=1},id:"airlock"},
+    {ok:true,lab:"Venous clamp fully open"},
+    {ok:!(S.kink>1&&S.kinkSide==="pump"),lab:"Arterial line at the pump: kinks, clamps",bad:"kinked near the pump, raising ALP",fix:"Straighten the arterial line",fn:()=>{S.kink=1},id:"kink"},
+    {ok:S.gas,lab:"Gas line, blender, sweep flowing",bad:"the gas line has come off the oxygenator",fix:"Reconnect the gas line",fn:()=>{S.gas=true},id:"gasfail"},
+    {ok:true,lab:"Pump head running, occlusion and direction correct"},
+  ];
+  const bad=items.filter(i=>!i.ok);
+  let html=`<b>Our side check:</b><ul class="chk">`+items.map((it,i)=>`<li class="${it.ok?"ok":"no"}"><span>${it.ok?"✓":"✗"} ${it.lab}${it.ok?"":`: <b>${it.bad}</b>`}</span>${it.ok?"":`<button data-i="${i}">${it.fix}</button>`}</li>`).join("")+`</ul>`;
+  if(!bad.length){
+    const h=[];
+    if(S.Vex>80||S.dPos<1||(S.dKink<1&&S.vkSide==="field")) h.push("But the reservoir is dropping, CVP is up and the arterial line is pulsatile, so blood is staying in the patient.");
+    if(S.kink>1) h.push("But ALP is still high.");
+    if(S.bleed>0) h.push("But the reservoir is still dropping.");
+    html+=`<p class="verdict">Our side is clear.${h.length?" "+h.join(" ")+" Ask the surgeon next.":""}</p>`;
+  } else html+=`<p class="verdict bad">Problem on our side. Fix it, then watch the reservoir and pressures recover.</p>`;
+  tsShow(html);
+  $("#tsOut").querySelectorAll(".chk button").forEach(bt=>bt.onclick=()=>{const it=items[+bt.dataset.i];if(bt.disabled)return;it.fn();bt.disabled=true;bt.textContent="Done ✓";feed("good",`${it.fix}: done.`);resolveEp(it.id)});
+  feed(bad.length?"warn":"sys",bad.length?"<b>Our side check found a problem:</b> "+bad.map(x=>x.bad).join("; ")+".":"Our side check: all clear.");
 });
-$("#tArt").addEventListener("click",()=>{
-  if(S.kink>1){S.kink=1;feed("good","Found a kink in the arterial line under the drapes. Straightened it, and ALP is coming down.")}
-  else feed("sys","Arterial line checked: no clamps or kinks.");
+const SQ=[
+  {g:"Venous side",id:"vkink",q:"Are there any kinks or clamps on the venous line?"},
+  {g:"Venous side",id:"vcan",q:"Is the venous cannula positioned well?"},
+  {g:"Venous side",id:"table",q:"Can we raise the table to improve gravity drainage?"},
+  {g:"Venous side",id:"vavd",q:"OK to add vacuum-assisted venous drainage?"},
+  {g:"Arterial side",id:"akink",q:"Are there any kinks or clamps on the arterial line?"},
+  {g:"Arterial side",id:"acan",q:"Is the arterial cannula positioned well?"},
+];
+$("#tSurg").addEventListener("click",()=>{
+  const o=$("#tsOut"), has=!o.hidden&&!!o.innerHTML;
+  const html=`<div class="sq${has?" conv":""}"><b>Ask the surgeon:</b>${["Venous side","Arterial side"].map(gn=>`<div class="sqg"><small>${gn}</small>${SQ.filter(x=>x.g===gn).map(x=>`<button data-q="${x.id}">${x.q}</button>`).join("")}</div>`).join("")}</div>`;
+  tsShow(html,has);
+  const all=o.querySelectorAll(".sq");const last=all[all.length-1];
+  last.querySelectorAll("button").forEach(bt=>bt.onclick=()=>askSurg(bt.dataset.q,bt));
+  last.scrollIntoView({block:"nearest",behavior:"smooth"});
 });
-$("#tCan").addEventListener("click",()=>{
-  if(S.dPos<1){S.dPos=1;feed("good",`Surgeon: "You're right, the venous cannula slipped. Repositioning... how's that?" Drainage restored: CVP falling, pulsatility gone.`)}
-  else feed("surg",`Surgeon: "Venous cannula position looks fine to me."`);
+function askSurg(id,bt){
+  if(bt.disabled) return;
+  S.cnt.surg++;
+  const x=SQ.find(q=>q.id===id);
+  const drain=S.dPos<1||S.dAir<1||S.dKink<1||S.Vex>80, art=S.kink>1;
+  const resTxt=D()==="hard"?"the reservoir is dropping":`the reservoir is ${fmt(S.res)} mL and dropping`;
+  const data=x.g==="Venous side"?(drain?`Venous return is poor: ${resTxt} and CVP is ${fmt(S.cvp)}.`:"My venous drainage looks OK."):(art?`Arterial line pressure is high at ${fmt(S.alp)}.`:`My arterial line pressure looks OK at ${fmt(S.alp)}.`);
+  const lines=[`You: "${data} ${x.q}"`];
+  const early=S.eps.some(ep=>ep.our===null);
+  S.eps.forEach(ep=>{if(ep.surg===null)ep.surg=S.t});
+  if(early) lines.push(`Surgeon: "Did you check your end first?"`);
+  let fixed=null;
+  if(id==="vkink"){if(S.dKink<1&&S.vkSide==="field"){S.dKink=1;fixed="venkink";lines.push(`Surgeon: "Yep, the venous line was kinked under the drapes. Fixed."`)}else lines.push(`Surgeon: "No kinks or clamps on the venous line up here."`)}
+  else if(id==="vcan"){if(S.dPos<1){S.dPos=1;fixed="malpos";lines.push(`Surgeon: "You're right, the venous cannula slipped. Repositioning... how's that?"`)}else lines.push(`Surgeon: "Venous cannula looks good to me."`)}
+  else if(id==="table"){if(S.tableUp)lines.push(`Surgeon: "The table's already up."`);else{S.tableUp=true;S.capBoost*=1.08;lines.push(`Surgeon: "Raising the table." More height between the patient and the reservoir means a bigger siphon, so gravity drainage improves a little.`)}}
+  else if(id==="vavd"){if(S.vavd)lines.push(`Surgeon: "Vacuum is already on."`);else{S.vavd=true;S.capBoost*=1.18;lines.push(`Surgeon: "Go ahead with vacuum assist." Start low and stay within your program's limits. It improves drainage, but it won't fix a kink or a misplaced cannula.`)}}
+  else if(id==="akink"){if(S.kink>1&&S.kinkSide==="field"){S.kink=1;fixed="kink";lines.push(`Surgeon: "There was a kink in the arterial line under the drapes. Fixed."`)}else lines.push(`Surgeon: "No kinks or clamps on the arterial line up here."`)}
+  else if(id==="acan") lines.push(`Surgeon: "Arterial cannula position looks good."`);
+  if(!fixed&&["vkink","vcan","akink","acan"].includes(id)&&(S.dAir<1||(S.dKink<1&&S.vkSide==="pump")||!S.gas||(S.kink>1&&S.kinkSide==="pump"))) lines.push(`Surgeon: "Everything looks fine up here. Is it on your end?"`);
+  bt.disabled=true;
+  tsShow(`<div class="conv">${lines.join("<br>")}</div>`,true);
+  lines.forEach((l,i)=>feed(i===0?"sys":(l.includes("Fixed")||l.includes("You're right"))?"good":"surg",l));
+  if(fixed) resolveEp(fixed);
+}
+function ask(msg,okText,onOk,onCancel){
+  $("#askMsg").textContent=msg; $("#askOk").textContent=okText;
+  const d=$("#askDlg");
+  $("#askOk").onclick=()=>{d.close();onOk()};
+  $("#askNo").onclick=()=>{d.close();if(onCancel)onCancel()};
+  d.oncancel=()=>{if(onCancel)onCancel()};
+  d.showModal();
+}
+function leaveCase(){
+  if(S){S.ended=true;clearInterval(timer)}
+  $("#cdbar").hidden=true;document.body.classList.remove("cdon");
+  $("#toast").classList.remove("show","fail");
+  ["#miss","#menuDlg","#dose"].forEach(id=>{const d=$(id);if(d.open)d.close()});
+  show("#sStart");
+}
+function askEnd(resume){
+  if(!S||S.ended) return;
+  const was=resume||speed||lastSpeed||5; setSpeed(0);
+  ask("End this case now and see your debrief?","End case",()=>{feed("sys","Case ended early.");endCase()},()=>setSpeed(was));
+}
+function mainMenu(resume){
+  if(!S||S.ended){leaveCase();return}
+  const was=resume||speed||lastSpeed||5; setSpeed(0);
+  ask("Leave this case and go to the main menu? This case won't be saved.","Go to main menu",leaveCase,()=>setSpeed(was));
+}
+$("#aEnd").addEventListener("click",()=>askEnd());
+$("#endTop").addEventListener("click",()=>askEnd());
+$("#aMenu").addEventListener("click",()=>mainMenu());
+$("#menuTop").addEventListener("click",()=>mainMenu());
+let menuWas=0;
+$("#sMenu").addEventListener("click",()=>{
+  if(!S||S.ended) return;
+  menuWas=speed||lastSpeed||5; setSpeed(0);
+  $("#mCoach").textContent="Coach: "+(cfg.coach==="on"?"on":"off");
+  $("#menuDlg").showModal();
 });
-$("#tGas").addEventListener("click",()=>{
-  if(!S.gas){S.gas=true;feed("good","The gas line had come off the oxygenator. Reconnected; sweep and FiO2 are delivering again.")}
-  else feed("sys","Gas supply checked: blender and line are connected and flowing.");
-});
+$("#mResume").addEventListener("click",()=>{$("#menuDlg").close();setSpeed(menuWas)});
+$("#mCoach").addEventListener("click",()=>{$("#coachTog").click();$("#mCoach").textContent="Coach: "+(cfg.coach==="on"?"on":"off")});
+$("#mEnd").addEventListener("click",()=>{$("#menuDlg").close();askEnd(menuWas)});
+$("#mMain").addEventListener("click",()=>{$("#menuDlg").close();mainMenu(menuWas)});
+$("#calcBack").addEventListener("click",()=>show("#sStart"));
 
 /* wean */
 $("#aWean").addEventListener("click",()=>{
@@ -1027,24 +1389,30 @@ $("#aWean").addEventListener("click",()=>{
 
 /* ---------- debrief ---------- */
 function endCase(){
-  S.ended=true; clearInterval(timer);
+  S.ended=true; clearInterval(timer); $("#cdbar").hidden=true; document.body.classList.remove("cdon");
   const r=S.inRange, rows=Object.keys(r).map(k=>[k,r[k].n?Math.round(r[k].ok/r[k].n*100):0]);
   const avg=rows.length?rows.reduce((a,b)=>a+b[1],0)/rows.length:0;
   let calc=0, calcTxt="Skipped";
   if(calcResult){calc=(calcResult.bOk?50:0)+(calcResult.fOk?50:0);calcTxt=`${calcResult.bOk?"✓":"✗"} BSA, ${calcResult.fOk?"✓":"✗"} top flow`}
-  const total=Math.max(0,Math.round(avg*0.8+(calcResult?calc*0.2:avg*0.2)-failsN*6));
+  const missN=S.winLog.filter(x=>!x.ok).length;
+  const total=Math.max(0,Math.round(avg*0.8+(calcResult?calc*0.2:avg*0.2)-failsN*6-missN*4));
   $("#debrief").innerHTML=`
     <h2 style="font-size:2rem">Case debrief</h2>
     <p class="k">${P.proc} • ${D()} • bypass time ${mmss(S.t)}</p>
-    <div class="big">${total}</div><p class="k">out of 100 (time in range, calculations, minus 6 per fail)</p>
+    <div class="big">${total}</div><p class="k">out of 100 (time in range, calculations, minus 6 per fail and 4 per missed response window)</p>
     <h3 style="margin-top:18px">Time in target range</h3>
     <ul>${rows.map(([k,p])=>`<li>${k}: <b>${p}%</b></li>`).join("")}</ul>
     <h3>Morning calculation</h3><p>${calcTxt}</p>
     <h3>Fails (${failsN})</h3>
     ${S.failList.length?`<ul>${S.failList.map(f=>`<li><b>${mmss(f.t)} ${f.title}.</b> ${f.why}</li>`).join("")}</ul>`:"<p>None. Clean case.</p>"}
+    <h3>Response window (10 s)</h3>
+    ${S.winLog.length?`<p>Caught <b>${S.winLog.filter(x=>x.ok).length} of ${S.winLog.length}</b> in time.</p><ul>${S.winLog.map(x=>`<li>${x.ok?"✓":"✗"} ${WIN[x.id].name}${x.ok?` (${x.t} s)`:": missed"}</li>`).join("")}</ul>`:"<p>No timed problems this case.</p>"}
+    <h3>Troubleshooting</h3>
+    ${S.troubleLog.length||S.eps.length?`<ul>${S.troubleLog.map(x=>`<li><b>${x.title}</b> fixed in ${x.mins} min. ${x.items.map(i=>(i[0]?"✓ ":"✗ ")+i[1]).join(" • ")}</li>`).join("")}${S.eps.map(ep=>`<li><b>${EPN[ep.id]}</b>: never fixed.</li>`).join("")}</ul><p class="k">The order: flow down → check our side → ask the surgeon (kinks, clamps, cannula position).</p>`:"<p>No line or circuit problems this case.</p>"}
     <h3>Blood gases drawn: ${S.gasLog.length}</h3>
-    <div class="row"><button class="go" id="again">Run another case</button></div>`;
-  $("#again").addEventListener("click",()=>show("#sStart"));
+    <div class="row"><button class="go" id="again">Run another case</button><button class="ghost" id="toMenu">Main menu</button></div>`;
+  $("#again").addEventListener("click",()=>$("#btnStart").click());
+  $("#toMenu").addEventListener("click",()=>show("#sStart"));
   show("#sDebrief");
 }
 })();
